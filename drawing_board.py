@@ -31,10 +31,36 @@ class Point:
         text_surface = my_font.render(self.name, False, (0, 0, 0))
         screen.blit(text_surface, (self.x, self.y))
 
+    def get_coords(self):
+        return self.x, self.y
+
+
+class Line:
+    def __init__(self, point1, point2):
+        self.point1 = point1
+        self.point2 = point2
+
+    def __find_infinite_line(self, infinity_constant=10000):
+        a, b = self.point1.get_coords(), self.point2.get_coords()
+        dx = b[0] - a[0]
+        dy = b[1] - a[1]
+        return ((a[0] + infinity_constant * dx, a[1] + infinity_constant * dy),
+                (a[0] - infinity_constant * dx, a[1] - infinity_constant * dy))
+
+    def draw(self, screen):
+        # pygame.draw.line(screen, (0, 0, 0), self.point1.get_coords(), self.point2.get_coords())
+        coords1, coord2 = self.__find_infinite_line()
+        pygame.draw.line(screen, (0, 0, 0), coords1, coord2)
+
 
 def redraw_everything(screen, points):
     for point in points:
         point.draw(screen)
+
+    for point in points:
+        for point2 in points:
+            line = Line(point, point2)
+            line.draw(screen)
     # Update the display
     pygame.display.flip()
 
@@ -51,7 +77,6 @@ def main():
     screen.fill((255, 255, 255))  # White
     pygame.display.update()
     pygame.display.set_caption("Complex Geometry Solver")
-
 
     point_namer = PointNamer()
     points = []
