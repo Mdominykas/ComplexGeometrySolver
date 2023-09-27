@@ -1,9 +1,10 @@
 import pygame
-# import pygame_gui
+import pygame_gui
 import sys
 import string
 
 from Circle import Circle
+from Constants import Constants
 from Line import Line
 from Point import Point
 
@@ -37,25 +38,22 @@ def redraw_everything(screen, points):
                 if point1 != point2 and point1 != point3 and point2 != point3:
                     circle = Circle(point1, point2, point3)
                     circle.draw(screen)
-    # Update the display
-    pygame.display.flip()
+
+    pygame.display.update()
 
 
 def main():
     pygame.init()
     pygame.font.init()
 
-    # Constants
-    screen_width, screen_height = 800, 600
-
-    # Create the screen
-    screen = pygame.display.set_mode((screen_width, screen_height))
+    screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
     screen.fill((255, 255, 255))  # White
     pygame.display.update()
     pygame.display.set_caption("Complex Geometry Solver")
 
-    # button = Checkbox(screen, 200, 200, 0)
-
+    manager = pygame_gui.UIManager((800, 600))
+    hello_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((350, 275), (100, 50)), text='Say Hello',
+                                                manager=manager)
     point_namer = PointNamer()
     points = []
     running = True
