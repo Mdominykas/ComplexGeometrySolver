@@ -25,35 +25,29 @@ class PointNamer:
         return self.two_letter.pop(0)
 
 
-def redraw_everything(screen, points):
-    for point in points:
+def redraw_everything(screen, drawing_state):
+    for point in drawing_state.points:
         point.draw(screen)
 
-    for point in points:
-        for point2 in points:
-            line = Line(point, point2)
-            line.draw(screen)
+    for line in drawing_state.lines:
+        line.draw(screen)
 
-    for point1 in points:
-        for point2 in points:
-            for point3 in points:
-                if point1 != point2 and point1 != point3 and point2 != point3:
-                    circle = Circle(point1, point2, point3)
-                    circle.draw(screen)
+    for circle in drawing_state.circles:
+        circle.draw(screen)
 
     pygame.display.update()
 
 
 def set_mode_to_point(drawing_state):
-    drawing_state.mode = DrawingState.POINT_MODE
+    drawing_state.change_mode(DrawingState.POINT_MODE)
 
 
 def set_mode_to_line(drawing_state):
-    drawing_state.mode = DrawingState.LINE_MODE
+    drawing_state.change_mode(DrawingState.LINE_MODE)
 
 
 def set_mode_to_circle(drawing_state):
-    drawing_state.mode = DrawingState.CIRCLE_MODE
+    drawing_state.change_mode(DrawingState.CIRCLE_MODE)
 
 
 def main():
@@ -65,14 +59,13 @@ def main():
     pygame.display.update()
     pygame.display.set_caption("Complex Geometry Solver")
 
-    drawing_state = DrawingState()
+    point_namer = PointNamer()
+    drawing_state = DrawingState(point_namer)
 
     buttons = [Button("Point", (10, 10), (70, 40), button_function=lambda: set_mode_to_point(drawing_state)),
                Button("Line", (80, 10), (150, 40), button_function=lambda: set_mode_to_line(drawing_state)),
                Button("Circle", (160, 10), (230, 40), button_function=lambda: set_mode_to_circle(drawing_state))]
 
-    point_namer = PointNamer()
-    points = []
     clock = pygame.time.Clock()
     running = True
     while running:
@@ -93,8 +86,9 @@ def main():
                             was_button_click = True
 
                     if not was_button_click:
-                        points.append(Point(x, y, point_namer))
-                        redraw_everything(screen, points)
+                        drawing_state.process_click(x, y)
+                        # drawing_state.points.append(Point(x, y, point_namer))
+                        redraw_everything(screen, drawing_state)
         pygame.display.update()
 
     # Quit Pygame

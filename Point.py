@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class Point:
@@ -17,3 +18,6 @@ class Point:
 
     def get_coords(self):
         return self.x, self.y
+
+    def dist_to(self, x, y):
+        return math.sqrt((x - self.x)**2 + (y - self.y) ** 2)
