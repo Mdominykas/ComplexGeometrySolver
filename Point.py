@@ -21,3 +21,6 @@ class Point:
 
     def dist_to(self, x, y):
         return math.sqrt((x - self.x)**2 + (y - self.y) ** 2)
+
+    def to_string(self):
+        return self.name

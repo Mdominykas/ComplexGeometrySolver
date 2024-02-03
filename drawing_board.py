@@ -25,7 +25,13 @@ class PointNamer:
         return self.two_letter.pop(0)
 
 
-def redraw_everything(screen, drawing_state):
+def draw_text(screen, x, y, text):
+    my_font = pygame.font.SysFont('Comic Sans MS', 30)
+    text_surface = my_font.render(text, False, (0, 0, 0))
+    screen.blit(text_surface, (x, y))
+
+
+def redraw_everything(screen, drawing_state: DrawingState):
     for point in drawing_state.points:
         point.draw(screen)
 
@@ -34,6 +40,9 @@ def redraw_everything(screen, drawing_state):
 
     for circle in drawing_state.circles:
         circle.draw(screen)
+
+    for (i, selected_point) in enumerate(drawing_state.selected_points):
+        draw_text(screen, Constants.SELECTED_POINTS_X, Constants.SELECTED_POINTS_Y + i * Constants.SELECTED_POINTS_INC, selected_point.to_string())
 
     pygame.display.update()
 
@@ -50,12 +59,18 @@ def set_mode_to_circle(drawing_state):
     drawing_state.change_mode(DrawingState.CIRCLE_MODE)
 
 
+def redraw_screen(screen, buttons, drawing_state):
+    screen.fill((255, 255, 255))
+    for button in buttons:
+        button.draw(screen)
+    redraw_everything(screen, drawing_state)
+
+
 def main():
     pygame.init()
     pygame.font.init()
 
     screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
-    screen.fill((255, 255, 255))  # White
     pygame.display.update()
     pygame.display.set_caption("Complex Geometry Solver")
 
@@ -66,11 +81,10 @@ def main():
                Button("Line", (80, 10), (150, 40), button_function=lambda: set_mode_to_line(drawing_state)),
                Button("Circle", (160, 10), (230, 40), button_function=lambda: set_mode_to_circle(drawing_state))]
 
+    redraw_screen(screen, buttons, drawing_state)
     clock = pygame.time.Clock()
     running = True
     while running:
-        for button in buttons:
-            button.draw(screen)
         for event in pygame.event.get():
             # print("event = ", event)
             if event.type == pygame.QUIT:
@@ -87,8 +101,8 @@ def main():
 
                     if not was_button_click:
                         drawing_state.process_click(x, y)
-                        # drawing_state.points.append(Point(x, y, point_namer))
-                        redraw_everything(screen, drawing_state)
+                        redraw_screen(screen, buttons, drawing_state)
+                        # only redrawing everything when there is event
         pygame.display.update()
 
     # Quit Pygame
