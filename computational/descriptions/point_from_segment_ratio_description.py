@@ -6,7 +6,7 @@ from computational.descriptions.point_description import PointDescription
 class PointFromSegmentRatioDescription(PointDescription):
     code_line_template = "let {} = point_from_segment_ratio({}, {}, {}, {})"
 
-    def __init__(self, name: object, dependencies):
+    def __init__(self, name, dependencies):
         if len(dependencies) != 4:
             raise Exception("Incorrect number of dependencies for point")
         point1, point2, ratio1, ratio2 = dependencies

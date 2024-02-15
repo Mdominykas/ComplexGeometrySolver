@@ -1,7 +1,8 @@
+from computational.descriptions.line_description import LineDescription
 from computational.descriptions.point_description import PointDescription
 
 
-class LineTwoPointsDescription(PointDescription):
+class LineTwoPointsDescription(LineDescription):
     code_line_template = "let {} = 2_point_line({}, {})"
 
     def __init__(self, name, dependencies):
