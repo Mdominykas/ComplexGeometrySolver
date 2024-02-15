@@ -2,8 +2,8 @@ import unittest
 
 from computational.Parser import Parser
 from computational.descriptions.description_writer import DescriptionWriter
-from computational.descriptions.line_description import LineDescription
-from computational.descriptions.point_description import PointDescription
+from computational.descriptions.line_two_points_description import LineTwoPointsDescription
+from computational.descriptions.point_free_description import PointFreeDescription
 
 
 class MyTestCase(unittest.TestCase):
@@ -33,16 +33,16 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(Parser.can_parse(code_line_template, code_line))
 
     def test_parsing(self):
-        point1 = PointDescription("a")
-        point2 = PointDescription("b")
-        line = LineDescription("line", [point1, point2])
+        point1 = PointFreeDescription("a")
+        point2 = PointFreeDescription("b")
+        line = LineTwoPointsDescription("line", [point1, point2])
 
         code_lines = DescriptionWriter.get_code_lines([line])
         parser = Parser()
         constructions = [parser.parse(line) for line in code_lines]
-        self.assertEqual(type(constructions[0]), PointDescription)
-        self.assertEqual(type(constructions[1]), PointDescription)
-        self.assertEqual(type(constructions[2]), LineDescription)
+        self.assertEqual(type(constructions[0]), PointFreeDescription)
+        self.assertEqual(type(constructions[1]), PointFreeDescription)
+        self.assertEqual(type(constructions[2]), LineTwoPointsDescription)
 
 
 if __name__ == '__main__':

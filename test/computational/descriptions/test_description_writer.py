@@ -1,18 +1,18 @@
 import unittest
 
-from computational.descriptions.circle_description import CircleDescription
+from computational.descriptions.circle_three_points_description import CircleThreePointsDescription
 from computational.descriptions.description_writer import DescriptionWriter
-from computational.descriptions.line_description import LineDescription
-from computational.descriptions.point_description import PointDescription
+from computational.descriptions.line_two_points_description import LineTwoPointsDescription
+from computational.descriptions.point_free_description import PointFreeDescription
 
 
 class DescriptionWriterTests(unittest.TestCase):
     def test_get_code_lines(self):
-        point1 = PointDescription("a")
-        point2 = PointDescription("b")
-        line = LineDescription("l1", [point1, point2])
-        point3 = PointDescription("c")
-        circle = CircleDescription("circ", [point1, point2, point3])
+        point1 = PointFreeDescription("a")
+        point2 = PointFreeDescription("b")
+        line = LineTwoPointsDescription("l1", [point1, point2])
+        point3 = PointFreeDescription("c")
+        circle = CircleThreePointsDescription("circ", [point1, point2, point3])
 
         point1_line = "let a = free_point()"
         point2_line = "let b = free_point()"

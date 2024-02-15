@@ -1,8 +1,10 @@
 from computational.descriptions.completed_descriptions import CompletedDescriptions
+from computational.descriptions.geometric_primitive_type import GeometricPrimitiveType
 
 
-class BaseDescription:
+class BaseDescription(GeometricPrimitiveType):
     def __init__(self, name, code_line, dependencies):
+        super().__init__()
         self.name = name
         self.code_line = code_line
         self.dependencies = dependencies

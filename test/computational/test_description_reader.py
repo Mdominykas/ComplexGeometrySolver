@@ -4,15 +4,15 @@ import unittest
 from computational.descriptions.completed_descriptions import CompletedDescriptions
 from computational.descriptions.description_reader import DescriptionReader
 from computational.descriptions.description_writer import DescriptionWriter
-from computational.descriptions.line_description import LineDescription
-from computational.descriptions.point_description import PointDescription
+from computational.descriptions.line_two_points_description import LineTwoPointsDescription
+from computational.descriptions.point_free_description import PointFreeDescription
 
 
 class TestDescriptionReading(unittest.TestCase):
     def test_something(self):
-        point1 = PointDescription("a")
-        point2 = PointDescription("b")
-        line = LineDescription("line", [point1, point2])
+        point1 = PointFreeDescription("a")
+        point2 = PointFreeDescription("b")
+        line = LineTwoPointsDescription("line", [point1, point2])
         temporary_file_name = "temporary_file.txt"
         DescriptionWriter.write_descriptions(temporary_file_name, [point1, line])
         constructions = DescriptionReader.read_descriptions(temporary_file_name)
