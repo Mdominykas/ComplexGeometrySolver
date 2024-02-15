@@ -1,4 +1,5 @@
 from computational.descriptions.point_description import PointDescription
+from computational.formulas.formulas import Variable
 
 
 class PointFreeDescription(PointDescription):
@@ -8,4 +9,5 @@ class PointFreeDescription(PointDescription):
         if len(dependencies) != 0:
             raise Exception("Too many dependencies for point")
         code_line = PointFreeDescription.code_line_template.format(name)
+        self.formula = Variable(name)
         super().__init__(name, code_line, dependencies)
