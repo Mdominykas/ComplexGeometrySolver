@@ -1,6 +1,6 @@
 import unittest
 
-from computational.Parser import Parser
+from computational.parser import Parser
 from computational.descriptions.description_writer import DescriptionWriter
 from computational.descriptions.line_two_points_description import LineTwoPointsDescription
 from computational.descriptions.point_free_description import PointFreeDescription
@@ -28,7 +28,6 @@ class MyTestCase(unittest.TestCase):
 
     def test_can_parse_when_different_whitespace(self):
         code_line = "let    a=   2_point_line(  b,c)"
-        print(Parser.divide_to_lexemes(code_line))
         code_line_template = "let {} = 2_point_line({}, {})"
         self.assertTrue(Parser.can_parse(code_line_template, code_line))
 

@@ -1,4 +1,4 @@
-from computational.Parser import Parser
+from computational.parser import Parser
 from computational.descriptions.all_descriptions import AllDescriptions
 
 

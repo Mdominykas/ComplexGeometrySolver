@@ -9,5 +9,4 @@ class PointFreeDescription(PointDescription):
         if len(dependencies) != 0:
             raise Exception("Too many dependencies for point")
         code_line = PointFreeDescription.code_line_template.format(name)
-        self.formula = Variable(name)
-        super().__init__(name, code_line, dependencies)
+        super().__init__(name, code_line, dependencies, Variable(name))
