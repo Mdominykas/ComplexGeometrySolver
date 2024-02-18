@@ -6,3 +6,6 @@ class Conjugation(UnaryOperation):
 
     def __init__(self, expression):
         super().__init__(expression)
+
+    def to_latex_string(self):
+        return "\\overline{" + self.expression.to_latex_string() + "}"

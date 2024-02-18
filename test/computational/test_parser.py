@@ -6,7 +6,7 @@ from computational.descriptions.line_two_points_description import LineTwoPoints
 from computational.descriptions.point_free_description import PointFreeDescription
 
 
-class MyTestCase(unittest.TestCase):
+class ParserTests(unittest.TestCase):
     def test_division_to_lexemes(self):
         lexemes = Parser.divide_to_lexemes("a = b 123 1a,b (2)")
         self.assertEqual(lexemes, ["a", "=", "b", "123", "1a", ",", "b", "(", "2", ")"])

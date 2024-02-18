@@ -9,7 +9,7 @@ from computational.descriptions.point_free_description import PointFreeDescripti
 
 
 class TestDescriptionReading(unittest.TestCase):
-    def test_something(self):
+    def test_writing_to_file(self):
         point1 = PointFreeDescription("a")
         point2 = PointFreeDescription("b")
         line = LineTwoPointsDescription("line", [point1, point2])

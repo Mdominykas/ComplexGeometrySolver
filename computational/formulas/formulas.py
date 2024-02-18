@@ -13,6 +13,10 @@ class Variable:
     def to_string(self):
         return self.name
 
+    def to_latex_string(self):
+        return self.name
+
+
 
 class Constant:
     def __init__(self, value):
@@ -25,6 +29,9 @@ class Constant:
         return isinstance(other, Constant) and self.value == other.value
 
     def to_string(self):
+        return str(self.value)
+
+    def to_latex_string(self):
         return str(self.value)
 
 
@@ -92,3 +99,6 @@ class Equation:
 
     def to_string(self):
         return self.expression1.to_string() + "=" + self.expression2.to_string()
+
+    def to_latex_string(self):
+        return self.expression1.to_latex_string() + " = " + self.expression2.to_latex_string()
