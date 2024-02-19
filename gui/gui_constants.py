@@ -1,4 +1,4 @@
-class Constants:
+class GuiConstants:
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 600
     SELECTED_POINTS_X = 600

@@ -1,6 +1,9 @@
+import pygame
+
 from gui.drawing_plane.circle import Circle
 from gui.drawing_plane.line import Line
 from gui.drawing_plane.point import Point
+from gui.gui_constants import GuiConstants
 
 
 class DrawingState:
@@ -54,3 +57,25 @@ class DrawingState:
             self.circles.append(Circle(self.selected_points[0], self.selected_points[1], self.selected_points[2]))
             self.selected_points = []
 
+    def redraw_everything(self, screen):
+        for point in self.points:
+            point.draw(screen)
+
+        for line in self.lines:
+            line.draw(screen)
+
+        for circle in self.circles:
+            circle.draw(screen)
+
+        for (i, selected_point) in enumerate(self.selected_points):
+            self.draw_text(screen, GuiConstants.SELECTED_POINTS_X,
+                           GuiConstants.SELECTED_POINTS_Y + i * GuiConstants.SELECTED_POINTS_INC,
+                           selected_point.to_string())
+
+        pygame.display.update()
+
+    @staticmethod
+    def draw_text(screen, x, y, text):
+        my_font = pygame.font.SysFont('Comic Sans MS', 30)
+        text_surface = my_font.render(text, False, (0, 0, 0))
+        screen.blit(text_surface, (x, y))
