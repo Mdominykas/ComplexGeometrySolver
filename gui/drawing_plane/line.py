@@ -1,6 +1,6 @@
 import pygame
 
-from Constants import Constants
+from gui.gui_constants import Constants
 
 
 class Line:

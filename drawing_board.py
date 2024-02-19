@@ -1,14 +1,10 @@
 import pygame
-import pygame_gui
 import sys
 import string
 
-from Button import Button
-from Circle import Circle
-from Constants import Constants
-from DrawingState import DrawingState
-from Line import Line
-from Point import Point
+from gui.control_panel.button import Button
+from gui.gui_constants import Constants
+from gui.drawing_plane.drawing_state import DrawingState
 
 
 class PointNamer:

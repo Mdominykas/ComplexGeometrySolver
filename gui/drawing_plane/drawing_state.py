@@ -1,6 +1,6 @@
-from Circle import Circle
-from Line import Line
-from Point import Point
+from gui.drawing_plane.circle import Circle
+from gui.drawing_plane.line import Line
+from gui.drawing_plane.point import Point
 
 
 class DrawingState:
