@@ -4,10 +4,8 @@ from gui.control_panel.base_control_element import BaseControlElement
 
 
 class Button(BaseControlElement):
-    def __init__(self, name, top_left_corner, bottom_right_corner, text='', color=(0, 0, 0), button_function=lambda: 7):
+    def __init__(self, name, top_left_corner, width, height, text='', color=(0, 0, 0), button_function=lambda: 7):
         self.name = name
-        width = bottom_right_corner[0] - top_left_corner[0]
-        height = bottom_right_corner[1] - top_left_corner[1]
         super().__init__(top_left_corner, width, height, button_function)
         self.text = text
         self.color = color

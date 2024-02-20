@@ -3,6 +3,7 @@ import pygame
 from gui.drawing_plane.circle import Circle
 from gui.drawing_plane.line import Line
 from gui.drawing_plane.point import Point
+from gui.drawing_plane.point_namer import PointNamer
 from gui.gui_constants import GuiConstants
 
 
@@ -12,8 +13,8 @@ class DrawingState:
     CIRCLE_MODE = 2
     DIST_EPSILON = 50
 
-    def __init__(self, point_namer):
-        self.point_namer = point_namer
+    def __init__(self):
+        self.point_namer = PointNamer()
         self.points, self.lines, self.circles = [], [], []
         self.mode = DrawingState.POINT_MODE
         self.selected_points = []

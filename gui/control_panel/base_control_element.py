@@ -1,6 +1,6 @@
 class BaseControlElement:
     def __init__(self, top_left_corner, width, height, on_click_function=lambda: None):
-        self.visibility = True # TODO: change to False, when you can construct gui
+        self.visibility = True
         self.top_left_corner = top_left_corner
         assert width > 0, "Width must be positive"
         assert height > 0, "Height must be positive"
@@ -8,10 +8,8 @@ class BaseControlElement:
         self.height = height
         self.on_click_function = on_click_function
 
-    def set_new_position(self, top_left_corner, width, height):
+    def set_new_position(self, top_left_corner):
         self.top_left_corner = top_left_corner
-        self.width = width
-        self.height = height
 
     def is_visible(self):
         return self.visibility
@@ -31,6 +29,12 @@ class BaseControlElement:
 
         return (x_tl <= x) and (x <= x_br) and (y_tl <= y) and (y <= y_br)
 
+    def process_click(self, x, y):
+        if not self.is_visible():
+            return
+        if self.is_clicked(x, y):
+            self.on_click()
+
     def on_click(self):
         self.on_click_function()
 
@@ -39,6 +43,3 @@ class BaseControlElement:
 
     def close(self):
         self.visibility = False
-
-    # def draw(self):
-    #     assert False, "Draw is not implemented in base class"
